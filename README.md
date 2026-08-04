@@ -18,9 +18,15 @@ To avoid foreign key dependency errors, execute the SQL files in this exact orde
 ## Database Automation & Triggers
 The schema includes PL/pgSQL triggers to maintain audit logs and automate updates:
 
-1.**`new_employee_before_insert_trigger`** Validates salary amounts in employees is >= zero
-  **`new_employee_after_insert_trigger`**  Automatically creates an initial joining salary in `salaryhistory` whenever a new employee is hired.
-   
+1. **`Employee Table Triggers`**
+* **Target:** `employees` table (`after insert`)
+* **`new_employee_after_insert_trigger`Function:** Automatically creates an initial joining salary in `salaryhistory` whenever a new employee is hired.
+
 2. **`trigger_salary_change_entry`**
-   * **Target:** `salaryhistory` table (`BEFORE INSERT`)
-   * **Function:** Validates salary amounts is > zero, Automatically syncs new compensation back to the `employees` table, and prevents historical/backdated raise inserts from overwriting(updating) current employee salaries.
+   * **Target:** `salaryhistory` table (`before insert`)
+   * **Function:**  automatically syncs new compensation back to the `employees` table, and prevents historical/backdated raise inserts from overwriting current employee salaries.
+3. **`min_and_max_salary_trigger`**
+   * **Target:** `employees` table (`before insert or update`)
+   * **Function:**  automatically validates if the salary entered for a employee falls within the companies allowed limit for that role. update part takes care of `trigger_salary_change_entry` trying to update salary to also fall within the allowed limit.
+
+

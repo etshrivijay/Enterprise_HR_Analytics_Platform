@@ -1,4 +1,4 @@
-truncate table departments restart identity cascade;
+truncate table salaryhistory,employeeprojects,employees,projects,roles,departments restart identity;
 
 insert into departments (d_name, d_location, d_budget) 
 values

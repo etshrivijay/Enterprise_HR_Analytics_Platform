@@ -1,4 +1,3 @@
-truncate table roles restart identity cascade;
 --role rank 1 - executive
 --role rank 2 management
 --role rank 3 senior

@@ -1,4 +1,3 @@
-truncate table employeeprojects restart identity cascade;
 --sponsor - mostly management who runs the projects including getting funds
 insert into employeeprojects (e_id, p_id, project_role, time_worked) 
 values

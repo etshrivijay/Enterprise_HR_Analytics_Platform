@@ -1,15 +1,10 @@
-truncate table employees restart identity cascade;
-truncate table salaryhistory restart identity cascade; -- used to reset salaryhistory identity 
--- also to prevent it from reseting the employee joining salary already entered
-
 insert into employees (e_name, e_age, e_salary, e_join_d, e_dept_id, e_role_id, e_m_id) 
 values
-
 ('vikram', 52, 4500000.00, '2018-03-01', 1, 1, null), -- ceo
 
 ('ananya', 44, 2800000.00, '2019-05-15', 2, 2, 1),-- department heads under ceo
 ('rahul', 46, 2200000.00, '2019-08-01', 4, 2, 1),
-('priya', 41, 1900000.00, '2020-01-10', 3, 2, 1),
+('priya', 41, 2000000.00, '2020-01-10', 3, 2, 1),
 ('rohan', 43, 2100000.00, '2020-04-01', 5, 2, 1),
 
 ('karthik', 38, 1600000.00, '2020-11-01', 2, 3, 2),   -- managers & leads
@@ -19,7 +14,7 @@ values
 
 ('arjun', 31, 1150000.00, '2022-01-10', 2, 5, 6), --staff
 ('neha', 29, 980000.00, '2022-03-20', 2, 5, 6),
-('amit', 27, 820000.00, '2022-07-15', 2, 6, 6),
+('amit', 27, 600000.00, '2022-07-15', 2, 6, 6),
 ('suresh', 34, 950000.00, '2022-02-01', 5, 10, 5),
 ('pooja', 28, 720000.00, '2022-08-10', 5, 10, 5),
 ('deepak', 30, 680000.00, '2023-01-15', 7, 11, 8),

@@ -1,8 +1,8 @@
 create table employees (
 e_id int generated always as identity primary key,
 e_name varchar(100) not null,
-e_age int,
-e_salary numeric,
+e_age int check(e_age>= 18),
+e_salary numeric check(e_salary>0),
 e_join_d date,
 e_dept_id int not null references departments (d_id),
 e_role_id int references roles (role_id),

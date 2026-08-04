@@ -1,5 +1,3 @@
-truncate table projects restart identity cascade;
-
 insert into projects (p_name, p_d_id, p_budget, p_s_date) 
 values
 ('hr portal', 3, 3500000, '2025-01-15'),
