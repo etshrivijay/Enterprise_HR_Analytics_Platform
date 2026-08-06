@@ -14,6 +14,7 @@ To avoid foreign key dependency errors, execute the SQL files in this exact orde
 4. `Schema/04_employees_table.sql`
 5. `Schema/05_employeeprojects_table.sql`
 6. `Schema/06_salaryhistory_table.sql`
+7. `Schema/07_07_Performance_review_table.sql`
 
 ## Database Automation & Triggers
 The schema includes PL/pgSQL triggers to maintain audit logs and automate updates:
@@ -21,12 +22,21 @@ The schema includes PL/pgSQL triggers to maintain audit logs and automate update
 1. **`Employee Table Triggers`**
 * **Target:** `employees` table (`after insert`)
 * **`new_employee_after_insert_trigger`Function:** Automatically creates an initial joining salary in `salaryhistory` whenever a new employee is hired.
-
 2. **`trigger_salary_change_entry`**
    * **Target:** `salaryhistory` table (`before insert`)
-   * **Function:**  automatically syncs new compensation back to the `employees` table, and prevents historical/backdated raise inserts from overwriting current employee salaries.
+   * **Function:**  automatically syncs new salary hike back to the `employees` table, and prevents historical/backdated raise inserts from overwriting current employee salaries.
 3. **`min_and_max_salary_trigger`**
    * **Target:** `employees` table (`before insert or update`)
    * **Function:**  automatically validates if the salary entered for a employee falls within the companies allowed limit for that role. update part takes care of `trigger_salary_change_entry` trying to update salary to also fall within the allowed limit.
+4. **`performance_review_salary_update`**
+   * **Target:** `performancereview` table (`after insert`)
+   * **Function:**  automatically computes salary hike once a year  based on review and inserts records in `salaryhistory`table which in turn updates `employee` tables using previous trigger `trigger_salary_change_entry` .
+
+## Constraints & Indexes
+
+1.**`idx_unique_active_review`** (or your index name)
+  * **Target:** `performancereview` (`e_id`, `r_date`)
+  * **Purpose:** to implement one review and one salary hike per year per employee
+   
 
 

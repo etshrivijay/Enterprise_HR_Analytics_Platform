@@ -6,5 +6,12 @@ e_salary numeric check(e_salary>0),
 e_join_d date,
 e_dept_id int not null references departments (d_id),
 e_role_id int references roles (role_id),
-e_m_id int references employees (e_id)
+e_m_id int references employees (e_id),
+termination_date date,
+e_status varchar(20) generated always as (
+case when ( termination_date is not null)
+then 'terminated'
+else 'active'
+end
+) stored
 );
